@@ -10,5 +10,9 @@ const person2 = JSON.parse(JSON.stringify(person))
 
 person2.Имя.И = 'alice'
 
-console.log(person2.Имя)
-console.log(person.Имя)
+function repeat (person,person2){
+console.log(person2)
+console.log(person)
+}
+
+repeat(person2)
