@@ -1,18 +1,18 @@
 const person = {
-    Имя : {
+    ФИО : {
         И: 'Bob',
         Ф: 'Mayer'
     },
-    age: 25
+    ВОЗРАСТ: 25
 }
 
 const person2 = JSON.parse(JSON.stringify(person))
 
-person2.Имя.И = 'alice'
+person2.ФИО.И = 'alice'
 
-function repeat (person,person2){
+function repeat (){
 console.log(person2)
 console.log(person)
 }
 
-repeat(person2)
+repeat()
