@@ -9,17 +9,24 @@
 #include <SD.h>             
 #include <TMRpcm.h> 
 
-void setup() {
-  pinMode(2, OUTPUT);
-  pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(5, INPUT);
+void start (void){
+  delay(1000);
+  yellow1;
+  delay(1000);
   yellow0;
-  green0;
-  red0;
+  delay(1000);
+  yellow1;
+  delay(1000);
+  yellow0;
+  delay(1000);
+  yellow1;
+  delay(1000);
+  yellow0;
+  delay(1000);
+  green1;
 }
 
-void start (void){
+void reload (void){
   delay(500);
   yellow1;
   delay(500);
@@ -43,20 +50,35 @@ void engage (void){
     
     yellow1; //звук зарядки
     red0;
-    //delay() время звука зарядки
-    
+    delay(2000); //время звука зарядки
+    sound();
     yellow0; // звук импульса
     red1;
-    //delay() время звука импульса
+    delay(1000); //время звука импульса
+    reload(); 
   }
   else if (button == LOW){
     yellow0;
     red0;
-    green1;  
+    green1; 
   }
 }
 
+void sound (void){
+  tone(15, 104, 1500);
+}
+
+void setup() {
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(5, INPUT);
+  yellow0;
+  green0;
+  red0;
+  start();
+}
+
 void loop() {
-  //start();
-  //engage();
+  engage();
 }
