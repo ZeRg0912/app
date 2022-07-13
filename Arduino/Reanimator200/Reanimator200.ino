@@ -65,13 +65,14 @@ void engage (void){
 }
 
 void sound (void){
-  tone(15, 104, 1500);
+  tone(9, 104, 1000);
 }
 
 void setup() {
   pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
+  pinMode(9, OUTPUT);
   pinMode(5, INPUT);
   yellow0;
   green0;
