@@ -27,18 +27,25 @@ void start (void){
 }
 
 void reload (void){
-  delay(500);
+  tone(9, 500, 500);
+  delay(500);  
   yellow1;
-  delay(500);
+  tone(9, 1000, 500);
+  delay(500);  
   yellow0;
-  delay(500);
+  tone(9, 500, 500);
+  delay(500);  
   yellow1;
-  delay(500);
+  tone(9, 1000, 500);
+  delay(500);  
   yellow0;
-  delay(500);
+  tone(9, 500, 500);
+  delay(500);  
   yellow1;
-  delay(500);
+  tone(9, 1000, 500);
+  delay(500);  
   yellow0;
+  tone(9, 500, 500);
   delay(500);
   green1;
 }
@@ -47,12 +54,14 @@ void engage (void){
   if (button == HIGH){
     green0;
     red0;
-    
-    yellow1; //звук зарядки
+    //звук зарядки
+    tone(9, 1000, 2000);
+    yellow1; 
     red0;
     delay(2000); //время звука зарядки
-    sound();
-    yellow0; // звук импульса
+    // звук импульса
+    tone(9, 3000, 1000);
+    yellow0; 
     red1;
     delay(1000); //время звука импульса
     reload(); 
@@ -62,10 +71,6 @@ void engage (void){
     red0;
     green1; 
   }
-}
-
-void sound (void){
-  tone(9, 104, 1000);
 }
 
 void setup() {
