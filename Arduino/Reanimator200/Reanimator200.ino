@@ -1,18 +1,18 @@
 #define yellow0 digitalWrite(2, LOW)
 #define green0 digitalWrite(3, LOW)
-#define red0 digitalWrite(4, LOW)
+#define red0 digitalWrite(6, LOW)
 #define yellow1 digitalWrite(2, HIGH)
 #define green1 digitalWrite(3, HIGH)
-#define red1 digitalWrite(4, HIGH)
+#define red1 digitalWrite(6, HIGH)
 #define button digitalRead(5)
 
-#include <SPI.h>
+//#include <SPI.h>
 #include <SD.h>             
 #include <TMRpcm.h> 
 
-#define SD_ChipSelectPin 7
+const int chipSelect = 4;
 
-TMRpcm tmrpcm;
+TMRpcm music;
 
 void start (void){
   delay(1000);
@@ -32,27 +32,22 @@ void start (void){
 }
 
 void reload (void){
-  tone(9, 500, 500);
+  music.play("sounds/3.wav");
   delay(500);  
   yellow1;
-  tone(9, 1000, 500);
   delay(500);  
   yellow0;
-  tone(9, 500, 500);
   delay(500);  
   yellow1;
-  tone(9, 1000, 500);
   delay(500);  
   yellow0;
-  tone(9, 500, 500);
   delay(500);  
   yellow1;
-  tone(9, 1000, 500);
   delay(500);  
   yellow0;
-  tone(9, 500, 500);
   delay(500);
   green1;
+  music.disable();
 }
 
 void engage (void){
@@ -60,12 +55,12 @@ void engage (void){
     green0;
     red0;
     //звук зарядки
-    tone(9, 1000, 2000);
+    music.play("sounds/1.wav");
     yellow1; 
     red0;
     delay(2000); //время звука зарядки
     // звук импульса
-    tone(9, 3000, 1000);
+    music.play("sounds/2.wav");
     yellow0; 
     red1;
     delay(1000); //время звука импульса
@@ -79,17 +74,25 @@ void engage (void){
 }
 
 void setup() {
-  tmrpcm.speakerPin = 9;
-  tmrpcm.volume(1);
-  tmrpcm.play("1.wav");
+  Serial.begin(9600);
+  Serial.println("Initializing SD card...");
+  if (!SD.begin(chipSelect)) 
+  {
+    Serial.println("initialization failed!");
+    while (1);
+  }
+  Serial.println("initialization done.");
+  music.speakerPin = 9;
+  music.setVolume(5);
+  music.quality(1);
   pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(9, OUTPUT);
+  pinMode(6, OUTPUT);
   pinMode(5, INPUT);
   yellow0;
   green0;
   red0;
+  music.disable();
   start();
 }
 
